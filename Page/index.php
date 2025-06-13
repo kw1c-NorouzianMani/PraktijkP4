@@ -3,11 +3,12 @@
  * Maker: Mani Norouzian
  * Date: 21-05-2025
  */
-?>
-<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include '../Includes/header.php';
 
-// Tellen hoe vaak deze gebruiker de website heeft bezocht
+// Tellen hoe vaak gebruiker bezoekt
 if (!isset($_SESSION['visits'])) {
     $_SESSION['visits'] = 1;
 } else {
@@ -22,17 +23,13 @@ if (!isset($_SESSION['visits'])) {
         <?php else: ?>
             <h2>Welkom terug, <?= htmlspecialchars($_SESSION['user']) ?>!</h2>
         <?php endif; ?>
+        <a href="../Page/artikelen.php">Bekijk alle artikelen</a>
         <?php unset($_SESSION['welkom_status']); ?>
     <?php else: ?>
         <h2>Welkom bij Wat Eet Jij Vandaag</h2>
     <?php endif; ?>
 
-    <p>Ontdek en beheer jouw favoriete items!</p>
     <img src="../Assest/banner.jpg" alt="Banner" />
 </section>
-
-<!-- Verborgen broncode met teller -->
-<!-- bezoekersteller: <?= $_SESSION['visits'] ?> keer bezocht -->
-
 <?php include '../Includes/footer.php'; ?>
 

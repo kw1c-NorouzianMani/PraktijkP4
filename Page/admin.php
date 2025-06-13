@@ -28,18 +28,18 @@ if (!$is_admin) {
 }
 
 // Haal gebruikers op uit database
-$gebruikers = $conn->query("SELECT username, email, is_admin FROM users")->fetchAll();
+$gebruikers = $conn->query("SELECT username, password, is_admin FROM users")->fetchAll();
 ?>
 
 <section class="admin-panel">
   <h2>Admin Dashboard</h2>
   <p>Alle geregistreerde gebruikers:</p>
   <table>
-    <tr><th>Gebruikersnaam</th><th>Email</th><th>Admin?</th></tr>
+    <tr><th>Gebruikersnaam</th><th>Password</th><th>Admin?</th></tr>
     <?php foreach ($gebruikers as $user): ?>
       <tr>
         <td><?= htmlspecialchars($user['username']) ?></td>
-        <td><?= htmlspecialchars($user['email']) ?></td>
+        <td><?= htmlspecialchars($user['password']) ?></td>
         <td><?= $user['is_admin'] ? '✅' : '❌' ?></td>
       </tr>
     <?php endforeach; ?>

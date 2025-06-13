@@ -6,7 +6,7 @@
 ?>
 <?php
 $host = 'localhost';
-$db = 'praktijkp4';
+$db = 'wejv';
 $user = 'root';
 $pass = '';
 

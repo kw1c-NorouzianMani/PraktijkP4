@@ -3,10 +3,8 @@
  * Maker: Mani Norouzian
  * Date: 21-05-2025
  */
-?>
-<?php
+session_start(); // helemaal bovenaan
 global $conn;
-include '../Includes/header.php';
 require '../Includes/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -19,18 +17,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user'] = $user['username'];
-        $_SESSION['welkom_status'] = "terug";  // 👈 Toegevoegd
-        $_SESSION['flash'] = "Je bent succesvol ingelogd.";
+        $_SESSION['welkom_status'] = "terug";
+        $_SESSION['flash'] = ["type" => "success", "message" => "Je bent succesvol ingelogd."];
         header("Location: index.php");
         exit;
     } else {
-        $error = "Ongeldige gebruikersnaam of wachtwoord.";
+        $_SESSION['flash'] = ["type" => "error", "message" => "Gebruikersnaam of wachtwoord is onjuist."];
+        header("Location: login.php");
+        exit;
     }
 }
+
+include '../Includes/header.php';
 ?>
+
 <section class="login-form">
     <h2>Inloggen</h2>
-    <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
     <form method="post">
         <label>Gebruikersnaam: <input type="text" name="username" required></label>
         <label>Wachtwoord:
@@ -42,7 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <button type="submit">Inloggen</button>
     </form>
 </section>
+
 <?php include '../Includes/footer.php'; ?>
+
 
 
 

@@ -7,11 +7,13 @@
 </main>
 <footer class="main-footer">
     <p>
-        &copy; <?= date('Y') ?> MijnJumbo |
+        &copy; <?= date('Y') ?> Wat Eet Je Vandaag |
         <?= isset($_SESSION['user']) ? "Ingelogd als " . $_SESSION['user'] : "Niet ingelogd" ?>
     </p>
 </footer>
+</div> <!-- sluit .page-container -->
 <script src="../JavaScript/script.js"></script>
 </body>
 </html>
+
 

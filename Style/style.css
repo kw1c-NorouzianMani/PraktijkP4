@@ -1,77 +1,116 @@
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: #f9f9f9;
-    color: #333;
+/* -------- BASIS STIJL -------- */
+* {
+    box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fffdf5;
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: #d85e00;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* -------- NAVBAR -------- */
 .main-header {
-    background-color: #ffde00;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(255, 223, 0, 0.95);
+    transition: background 0.3s ease;
     padding: 1em 2em;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    backdrop-filter: blur(8px);
+}
+
+.main-header.scrolled {
+    background: rgba(255, 255, 255, 0.7);
 }
 
 .main-header .logo img {
-    height: 40px;
+    height: 50px;
+}
+
+.nav-search-bar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 1em;
+}
+
+.nav-search-bar input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.5em 1em;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1em;
 }
 
 .main-header nav ul {
     list-style: none;
     display: flex;
-    gap: 1em;
+    gap: 1.5em;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 .main-header nav a {
-    text-decoration: none;
-    color: black;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1em;
+    color: #333;
 }
 
-.main-footer {
-    background: #333;
-    color: white;
-    padding: 1em;
-    text-align: center;
-}
-
+/* -------- HOME INTRO -------- */
 .home-intro {
-    padding: 2em;
+    padding: 3em 1em;
     text-align: center;
+    background-color: #fff;
 }
 
 .home-intro img {
     max-width: 100%;
-    height: auto;
+    border-radius: 8px;
 }
 
-.login-form {
-    max-width: 400px;
-    margin: 2em auto;
-    padding: 1em;
-    background: white;
+/* -------- FORM STYLING -------- */
+.login-form,
+.admin-panel {
+    background: #fff;
+    padding: 2em;
+    max-width: 600px;
+    margin: 2em auto 5em;
     border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
 
 .login-form label {
     display: block;
     margin-bottom: 1em;
+    font-weight: bold;
 }
 
-button {
-    background-color: #ffde00;
-    border: none;
-    padding: 0.5em 1em;
-    cursor: pointer;
+.login-form input {
+    width: 100%;
+    padding: 0.6em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
-.error {
-    color: red;
-}
 .password-wrapper {
     display: flex;
     align-items: center;
@@ -82,76 +121,158 @@ button {
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
-.flash-message {
-    background-color: #e0ffe0;
-    color: #006600;
+
+/* -------- ARTIKELEN -------- */
+.artikel-filter {
+    background-color: #fff;
     padding: 1em;
-    margin: 1em;
-    border-left: 5px solid #00aa00;
-    border-radius: 5px;
-    font-weight: bold;
+    margin: 2em auto;
+    border-radius: 10px;
+    max-width: 1000px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
-.flash-message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #e0ffe0;
-    color: #006600;
-    padding: 0.7em 1em;
-    border-left: 4px solid #00aa00;
+
+.artikel-filter form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.artikel-filter input,
+.artikel-filter select {
+    padding: 0.6em;
+    font-size: 1em;
+    border: 1px solid #ccc;
     border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    z-index: 9999;
+    flex: 1 1 250px;
+}
+
+.artikel-lijst {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2em;
+    padding: 2em 1em;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.artikel-kaart {
+    background: #fff9ec;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.artikel-kaart:hover {
+    transform: translateY(-4px);
+}
+
+/* -------- BUTTONS -------- */
+button,
+.admin-knoppen a {
+    background-color: #ffb200;
+    color: white;
+    padding: 0.6em 1.2em;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover,
+.admin-knoppen a:hover {
+    background-color: #cc8500;
+}
+
+.admin-knoppen {
+    margin-top: 1em;
+    display: flex;
+    gap: 1em;
+}
+
+/* -------- FOOTER -------- */
+.main-footer {
+    background-color: #222;
+    color: #eee;
+    padding: 1.5em 2em;
+    text-align: center;
+    font-size: 0.9em;
+    margin-top: auto;
+}
+
+/* -------- FLASH MESSAGE -------- */
+.flash-message {
+    padding: 1em 1.5em;
+    margin: 1em auto;
+    border-radius: 6px;
+    font-weight: bold;
+    max-width: 600px;
+    text-align: center;
     transition: opacity 0.5s ease;
 }
-.admin-panel {
-    padding: 2em;
+.flash-success {
+    background-color: #e0ffe0;
+    color: #006600;
+    border-left: 5px solid #00aa00;
+}
+.flash-error {
+    background-color: #ffe0e0;
+    color: #cc0000;
+    border-left: 5px solid #dd0000;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-.admin-panel table {
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main.content {
+    flex: 1;
+    padding: 2em 1em;
+}
+
+/* Laat footer altijd onderaan plakken */
+.main-footer {
+    background-color: #222;
+    color: #eee;
+    padding: 1.5em 2em;
+    text-align: center;
+    font-size: 0.9em;
+    margin-top: auto;
     width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
-
-.admin-panel th, .admin-panel td {
-    padding: 0.8em;
-    border: 1px solid #ccc;
-    text-align: left;
-}
-
-.admin-panel th {
-    background: #f0f0f0;
-}
+/* -------- RESPONSIVE -------- */
 @media screen and (max-width: 768px) {
     .main-header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+    }
+
+    .nav-search-bar {
+        margin: 1em 0;
     }
 
     .main-header nav ul {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5em;
+        margin-top: 1em;
     }
 
-    .login-form {
+    .login-form,
+    .admin-panel {
         width: 90%;
     }
-
-    .home-intro img {
-        width: 100%;
-        height: auto;
-    }
-
-    .admin-panel table {
-        font-size: 0.9em;
-    }
-
-    .admin-panel table td, .admin-panel table th {
-        padding: 0.4em;
-    }
 }
+
